@@ -1,8 +1,10 @@
 version: '3'
 services:
-  ollama:
-    image: ollama/ollama
-    volumes:
-      - /private/var/services/ollama:/root/.ollama
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
     ports:
-      - 11434:11434
+      - 7654:7654
+    environment:
+      - MODEL_URL=http://host.docker.internal:11434
