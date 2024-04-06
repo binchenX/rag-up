@@ -6,8 +6,8 @@ Werkzeug==2.2.2
 flask-cors
 
 langchain==0.0.352
-chromadb==0.3.29
-tiktoken
-unstructured
+chromadb==0.4.24
+tiktoken==0.6.0
+unstructured==0.13.2
 unstructured[local-pdf]
 unstructured[local-inference]
