@@ -15,4 +15,8 @@ services:
     ports:
       - 7654:7654
     environment:
-      - MODEL_URL=http://host.docker.internal:11434
+      # when model running in local host
+      # - MODEL_URL=http://host.docker.internal:11434
+      - MODEL_URL=http://model:11434
+    depends_on:
+      - model
