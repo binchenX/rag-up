@@ -6,6 +6,9 @@ INIT_INDEX = os.getenv('INIT_INDEX', 'false').lower() == 'true'
 # vector index persist directory
 INDEX_PERSIST_DIRECTORY = os.getenv('INDEX_PERSIST_DIRECTORY', "./data/chromadb")
 
+# Embedding Model
+EMBEDDING_MODEL=os.getenv("EMBEDDING_MODEL","all-MiniLM-L6-v2")
+
 # target url to scrape
 TARGET_URL =  os.getenv('TARGET_URL', "https://open5gs.org/open5gs/docs/")
 
@@ -17,3 +20,7 @@ MONGO_HOST = os.getenv('MONGO_HOST', 'localhost')
 MONGO_PORT = os.getenv('MONGO_PORT', 27017)
 MONGO_USER = os.getenv('MONGO_USER', 'testuser')
 MONGO_PASS = os.getenv('MONGO_PASS', 'testpass')
+
+# base model config
+MODEL_NAME = os.getenv("BASE_MODEL", "gemma:2b")
+MODE_URL = os.getenv("MODEL_URL", "http://localhost:11434")

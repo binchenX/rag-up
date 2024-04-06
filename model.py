@@ -55,9 +55,9 @@ def init_index():
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     documents = text_splitter.split_documents(documents)
 
-    # create embeddings with huggingface embedding model `all-MiniLM-L6-v2`
+    # create embeddings with huggingface embedding model
     # then persist the vector index on vector db
-    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    embeddings = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
     vectordb = Chroma.from_documents(
         documents=documents,
         embedding=embeddings,
@@ -70,14 +70,14 @@ def init_conversation():
     global conversation
 
     # load index
-    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    embeddings = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
     vectordb = Chroma(persist_directory=INDEX_PERSIST_DIRECTORY,embedding_function=embeddings)
 
     # llama2 llm which runs with ollama
     # ollama expose an api for the llam in `localhost:11434`
     llm = Ollama(
-        model="llama2",
-        base_url="http://localhost:11434",
+        model=MODEL_NAME,
+        base_url=MODE_URL,
         verbose=True,
     )
 
