@@ -1,5 +1,13 @@
 version: '3'
 services:
+  model:
+    image: ollama/ollama:latest
+    ports:
+      - 11434:11434
+    volumes:
+      # assume you have installed pulled model locally already
+      - /Users/binchen/.ollama/:/root/.ollama
+    tty: true
   app:
     build:
       context: ./app
