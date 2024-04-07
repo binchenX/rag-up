@@ -6,7 +6,8 @@ services:
       - 11434:11434
     volumes:
       # assume you have installed pulled model locally already
-      - /Users/binchen/.ollama/:/root/.ollama
+      # OLLAMA_MODEL_DATA=/Users/binchen/.ollama/
+      - ${OLLAMA_MODEL_DATA}:/root/.ollama
     tty: true
   app:
     build:
@@ -18,5 +19,14 @@ services:
       # when model running in local host
       # - MODEL_URL=http://host.docker.internal:11434
       - MODEL_URL=http://model:11434
+      # init index only in the first run to index the external source
+      # command it out in the following
+      - INIT_INDEX=true
+      # the index db dir (in container)
+      # - INDEX_PERSIST_DIRECTORY=data/chromadb
+      - EXTERNAL_DATA_URL=https://www.devicu.com/blog/
+    volumes:
+      # map local volume to avoid need to index it everytime
+      - ./data:/app/data
     depends_on:
       - model

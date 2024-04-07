@@ -15,7 +15,7 @@ INDEX_PERSIST_DIRECTORY = os.getenv('INDEX_PERSIST_DIRECTORY', "./data/chromadb"
 EMBEDDING_MODEL=os.getenv("EMBEDDING_MODEL","all-MiniLM-L6-v2")
 
 # External data source: target url to scrape
-TARGET_URL =  os.getenv('TARGET_URL', "https://open5gs.org/open5gs/docs/")
+EXTERNAL_DATA_URL =  os.getenv('EXTERNAL_DATA_URL', "https://open5gs.org/open5gs/docs/")
 
 # Chat http api port
 HTTP_PORT = os.getenv('HTTP_PORT', 7654)

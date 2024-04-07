@@ -31,9 +31,10 @@ def init_index():
         logging.info("continue without initializing index")
         return
 
+    logging.info("build index from source `%s`", EXTERNAL_DATA_URL)
     # scrape data from web
     documents = RecursiveUrlLoader(
-        TARGET_URL,
+        EXTERNAL_DATA_URL,
         max_depth=4,
         extractor=lambda x: Soup(x, "html.parser").text,
         prevent_outside=True,
