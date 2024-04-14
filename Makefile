@@ -10,6 +10,6 @@ llm:
 
 .PHONY: chat
 chat:
-	curl -i -XPOST "http://localhost:7654/api/question" \
+	curl -i -XPOST "http://localhost:7654/api/generate" \
     --header "Content-Type: application/json" \
-    --data '{"question": "$(message)", "user_id": "koala"}'
+    --data '{"prompt": "$(message)"}'

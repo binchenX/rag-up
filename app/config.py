@@ -3,7 +3,7 @@ import os
 
 # base model config
 MODEL_NAME = os.getenv("BASE_MODEL", "gemma:2b")
-MODE_URL = os.getenv("MODEL_URL", "http://localhost:11434")
+MODEL_URL = os.getenv("MODEL_URL", "http://localhost:11434")
 
 # define init index
 INIT_INDEX = os.getenv('INIT_INDEX', 'false').lower() == 'true'

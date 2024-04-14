@@ -12,14 +12,17 @@ from langchain.memory import ConversationBufferMemory
 from langchain.llms import OpenAI
 from langchain.embeddings import HuggingFaceEmbeddings
 from bs4 import BeautifulSoup as Soup
-from langchain.utils.html import (PREFIXES_TO_IGNORE_REGEX,
-                                  SUFFIXES_TO_IGNORE_REGEX)
+from langchain.utils.html import PREFIXES_TO_IGNORE_REGEX, SUFFIXES_TO_IGNORE_REGEX
 
 from config import *
 import logging
 import sys
 
-logging.basicConfig(stream=sys.stdout, level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    stream=sys.stdout,
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+)
 
 
 global conversation
@@ -62,7 +65,7 @@ def init_index():
     vectordb = Chroma.from_documents(
         documents=documents,
         embedding=embeddings,
-        persist_directory=INDEX_PERSIST_DIRECTORY
+        persist_directory=INDEX_PERSIST_DIRECTORY,
     )
     vectordb.persist()
 
@@ -72,13 +75,15 @@ def init_conversation():
 
     # load index
     embeddings = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
-    vectordb = Chroma(persist_directory=INDEX_PERSIST_DIRECTORY,embedding_function=embeddings)
+    vectordb = Chroma(
+        persist_directory=INDEX_PERSIST_DIRECTORY, embedding_function=embeddings
+    )
 
     # llama2 llm which runs with ollama
     # ollama expose an api for the llam in `localhost:11434`
     llm = Ollama(
         model=MODEL_NAME,
-        base_url=MODE_URL,
+        base_url=MODEL_URL,
         verbose=True,
     )
 
@@ -91,12 +96,12 @@ def init_conversation():
     )
 
 
-def chat(question, user_id):
+def chat(question):
     global conversation
 
     chat_history = []
     response = conversation({"question": question, "chat_history": chat_history})
-    answer = response['answer']
+    answer = response["answer"]
 
     logging.info("got response from llm - %s", answer)
 
