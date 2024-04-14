@@ -30,3 +30,12 @@ services:
       - ./data:/app/data
     depends_on:
       - model
+    # create web-ui service using docker run -d -p 3000:8080 -e OLLAMA_BASE_URL=https://example.com -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    ports:
+      - 3000:8080
+    volumes:
+      - ./data/webui:/app/backend/data
+    environment:
+      - OLLAMA_BASE_URL=http://model:11434
